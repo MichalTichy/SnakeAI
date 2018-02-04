@@ -13,6 +13,7 @@ namespace SnakeAI
 
         protected SnakeHead Head;
         public Point HeadPossition => Head.Possition;
+        public ICollection<Point> BodyPossition => Body.Select(t => t.Possition).ToArray();
 
         protected IList<SnakeBodyPart> Body;
 

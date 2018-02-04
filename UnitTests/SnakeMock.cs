@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using SnakeAI;
 
@@ -9,6 +10,8 @@ namespace UnitTests
         public Direction Heading { get; set; }
         public bool IsAlive { get; }
         public Point HeadPossition { get; set; }
+        public ICollection<Point> BodyPossition { get; set; }
+
         public void Grow()
         {
             throw new NotImplementedException();

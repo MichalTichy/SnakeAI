@@ -26,7 +26,7 @@ namespace UnitTests
         [TestMethod, TestCategory("Heading UP")]
         public void HeadingUp_FoodDistance2()
         {
-            var worldSize = new Size() {Height = 1, Width = 1};
+            var worldSize = new Size() {Height = 4, Width = 4};
             var world = new WorldMock(worldSize);
             world.FoodPossition=new Point(0,1);
             var snake = new SnakeMock() {Heading = Direction.Up, HeadPossition = new Point(1, 1)};
@@ -56,7 +56,7 @@ namespace UnitTests
         [TestMethod, TestCategory("Heading DOWN")]
         public void HeadingDown_FoodDistance1()
         {
-            var worldSize = new Size() {Height = 1, Width = 1};
+            var worldSize = new Size() {Height = 4, Width = 4};
             var world = new WorldMock(worldSize);
             world.FoodPossition=new Point(0,1);
             var snake = new SnakeMock() {Heading = Direction.Down, HeadPossition = new Point(1, 1)};
@@ -71,10 +71,10 @@ namespace UnitTests
         [TestMethod, TestCategory("Heading RIGHT")]
         public void HeadingRight_FoodDistance1()
         {
-            var worldSize = new Size() {Height = 1, Width = 1};
+            var worldSize = new Size() {Height = 4, Width = 4};
             var world = new WorldMock(worldSize);
             world.FoodPossition=new Point(0,1);
-            var snake = new SnakeMock() {Heading = Direction.Down, HeadPossition = new Point(1, 1)};
+            var snake = new SnakeMock() {Heading = Direction.Right, HeadPossition = new Point(1, 1)};
             var distance = new Distance(world, snake);
 
             Assert.AreEqual(null, distance.DistanceToFoodAhead);
@@ -86,10 +86,10 @@ namespace UnitTests
         [TestMethod, TestCategory("Heading LEFT")]
         public void HeadingLeft_FoodDistance1()
         {
-            var worldSize = new Size() {Height = 1, Width = 1};
+            var worldSize = new Size() {Height = 4, Width = 4};
             var world = new WorldMock(worldSize);
             world.FoodPossition=new Point(0,1);
-            var snake = new SnakeMock() {Heading = Direction.Down, HeadPossition = new Point(1, 1)};
+            var snake = new SnakeMock() {Heading = Direction.Left, HeadPossition = new Point(1, 1)};
             var distance = new Distance(world, snake);
 
             Assert.AreEqual(1, distance.DistanceToFoodAhead);

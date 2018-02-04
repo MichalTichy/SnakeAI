@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 
-namespace SnakeAI.Snake
+namespace SnakeBase.Snake
 {
-    public class SnakeBodyPart
+    public class SnakeBodyPart : ISnakeBodyPart
     {
         public Point Possition { get; set; }
 

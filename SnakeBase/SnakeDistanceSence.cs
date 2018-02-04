@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.Linq.Expressions;
-using SnakeAI.Snake;
-using SnakeAI.World;
+using SnakeBase.Snake;
+using SnakeBase.World;
 
-namespace SnakeAI
+namespace SnakeBase
 {
     public class SnakeDistanceSence : IDistanceSence
     {

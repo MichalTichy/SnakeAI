@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SnakeAI
+namespace SnakeBase
 {
     public static class EnumerableExtensions
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using SnakeAI.Snake;
+using SnakeBase.Snake;
 
-namespace SnakeAI.World
+namespace SnakeBase.World
 {
     public class World : IWorld
     {

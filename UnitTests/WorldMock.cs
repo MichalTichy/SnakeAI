@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
-using SnakeAI;
-using SnakeAI.World;
+using SnakeBase.World;
 
 namespace UnitTests
 {

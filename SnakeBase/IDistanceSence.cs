@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SnakeAI
+namespace SnakeBase
 {
     public interface IDistanceSence
     {

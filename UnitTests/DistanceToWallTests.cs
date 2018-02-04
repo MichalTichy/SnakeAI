@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SnakeAI;
+using SnakeBase;
 
 namespace UnitTests
 {

@@ -2,37 +2,30 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using SnakeAI.AI;
+using SnakeBase.World;
 
-namespace SnakeAI.Snake
+namespace SnakeBase.Snake
 {
-    public class Snake : ISnake
+    public abstract class BaseSnake : ISnake
     {
-        public Genome Genome { get; }
         public Direction Heading => DetermineHeading();
 
         public bool IsAlive { get; protected set; } = true;
 
-        protected SnakeHead Head;
+        protected abstract ISnakeHead Head { get; }
+
+        protected virtual IList<ISnakeBodyPart> Body { get; set; } = new List<ISnakeBodyPart>();
+
         public Point HeadPossition => Head.Possition;
-        public ICollection<Point> BodyPossition => Body.Select(t => t.Possition).ToArray();
+        public virtual ICollection<Point> BodyPossition => Body.Select(t => t.Possition).ToArray();
 
-        protected IList<SnakeBodyPart> Body;
 
-        protected readonly SnakeDistanceSence distanceSence;
+        protected abstract SnakeDistanceSence distanceSence { get; }
         
-        public Snake(Point initialPossition,Genome genome, World.World world)
-        {
-            Genome = genome;
-            distanceSence = new SnakeDistanceSence(world,this);
-            Head = new SnakeHead(initialPossition,genome,distanceSence);
-            Body = new List<SnakeBodyPart>();
-        }
-
         public virtual void Move()
         {
 
-            var nextDirection = Head.SnakeBrain.DetermineNextMove();
+            var nextDirection = Head.Brain.DetermineNextMove();
 
             switch (nextDirection)
             {

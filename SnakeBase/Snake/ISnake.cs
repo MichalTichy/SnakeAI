@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
-namespace SnakeAI.Snake
+namespace SnakeBase.Snake
 {
     public interface ISnake
     {

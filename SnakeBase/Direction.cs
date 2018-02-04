@@ -1,4 +1,4 @@
-﻿namespace SnakeAI
+﻿namespace SnakeBase
 {
     public enum Direction
     {

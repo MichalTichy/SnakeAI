@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using SnakeBase;
+using SnakeBase.Snake;
 
 namespace SnakeAI.AI
 {
-    public class SnakeBrain : Brain
+    public class SmartSnakeBrain : Brain
     {
         private readonly SnakeDistanceSence distanceSence;
         
@@ -18,7 +20,7 @@ namespace SnakeAI.AI
         protected INeuron LeftNeuron { get; set; }
         protected INeuron RightNeuron { get; set; }
 
-        public SnakeBrain(Genome genome,SnakeDistanceSence distanceSence)
+        public SmartSnakeBrain(Genome genome,SnakeDistanceSence distanceSence)
         {
             this.distanceSence = distanceSence;
 

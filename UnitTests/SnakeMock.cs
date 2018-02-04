@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using SnakeAI;
 using SnakeAI.Snake;
+using SnakeBase;
+using SnakeBase.Snake;
 
 namespace UnitTests
 {

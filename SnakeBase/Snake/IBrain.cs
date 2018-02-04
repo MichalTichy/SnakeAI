@@ -1,4 +1,4 @@
-﻿namespace SnakeAI.AI
+﻿namespace SnakeBase.Snake
 {
     public interface IBrain
     {

@@ -1,4 +1,7 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using SnakeBase;
+using SnakeBase.Snake;
 using SnakeBase.World;
 
 namespace UnitTests
@@ -10,7 +13,21 @@ namespace UnitTests
             Size = size;
         }
 
-        public Point FoodPossition { get; set; }
+        public Location FoodPossition { get; set; }
         public Size Size { get; set; }
+        public void AddSnakes(ICollection<ISnake> snakes)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool RemoveDeadSnakes()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void PerformGameStep()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

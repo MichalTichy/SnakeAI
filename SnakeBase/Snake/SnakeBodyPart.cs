@@ -4,9 +4,9 @@ namespace SnakeBase.Snake
 {
     public class SnakeBodyPart : ISnakeBodyPart
     {
-        public Point Possition { get; set; }
+        public Location Possition { get; set; }
 
-        public SnakeBodyPart(Point possition)
+        public SnakeBodyPart(Location possition)
         {
             Possition = possition;
         }

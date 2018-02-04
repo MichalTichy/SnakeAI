@@ -10,10 +10,10 @@ namespace SnakeBase.World
     {
         public Size Size { get; set; }
 
-        protected ICollection<ISnake> Snakes { get; set; }
+        protected ICollection<ISnake> Snakes { get; set; } = new List<ISnake>();
         protected IEnumerable<ISnake> AliveSnakes => Snakes.Where(t => t.IsAlive);
         protected IEnumerable<ISnake> DeathSnakes => Snakes.Where(t => !t.IsAlive);
-        public Point FoodPossition { get; protected set; }
+        public Location FoodPossition { get; protected set; }
 
         public World(Size size)
         {
@@ -21,9 +21,27 @@ namespace SnakeBase.World
             GenerateNextFood();
         }
 
-        protected virtual void PerformGameStep()
+        public void AddSnakes(ICollection<ISnake> snakes)
         {
-            foreach (var snake in Snakes)
+            foreach (var snake in snakes)
+            {
+                Snakes.Add(snake);
+            }
+        }
+
+        public bool RemoveDeadSnakes()
+        {
+            foreach (var deathSnake in DeathSnakes)
+            {
+                Snakes.Remove(deathSnake);
+            }
+
+            return !AliveSnakes.Any();
+        }
+
+        public virtual void PerformGameStep()
+        {
+            foreach (var snake in AliveSnakes)
                 snake.Move();
 
             var snakesAtFoodPossition = AliveSnakes.Where(s => s.HeadPossition == FoodPossition).ToList();
@@ -38,7 +56,7 @@ namespace SnakeBase.World
         protected void GenerateNextFood()
         {
             var random = new Random();
-            FoodPossition = new Point(random.Next(Size.Width+1), random.Next(Size.Height+1));
+            FoodPossition = new Location(random.Next(Size.Width+1), random.Next(Size.Height+1));
         }
     }
 }

@@ -4,6 +4,6 @@ namespace SnakeBase.Snake
 {
     public interface ISnakeBodyPart
     {
-        Point Possition { get; }
+        Location Possition { get; }
     }
 }

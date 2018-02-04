@@ -423,11 +423,11 @@ namespace SnakeBase
 
         #endregion
 
-        protected virtual (int xDistance, int yDistance)? GetDistanceFromHead(Point point)
+        protected virtual (int xDistance, int yDistance)? GetDistanceFromHead(Location location)
         {
             return (
-                point.X - snake.HeadPossition.X,
-                point.Y - snake.HeadPossition.Y
+                location.X - snake.HeadPossition.X,
+                location.Y - snake.HeadPossition.Y
                 );
         }
     }

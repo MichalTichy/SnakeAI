@@ -10,10 +10,10 @@ namespace SnakeAI.Snake
 {
     public class SmartSnakeHead : ISnakeHead
     {
-        public Point Possition { get; set; }
+        public  Location Possition { get; }
         public IBrain Brain { get; }
 
-        public SmartSnakeHead(Point initialPossition, Genome genome, SnakeDistanceSence distanceSence)
+        public SmartSnakeHead(Location initialPossition, Genome genome, SnakeDistanceSence distanceSence)
         {
             Possition = initialPossition;
             Brain=new SmartSnakeBrain(genome,distanceSence);

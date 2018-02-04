@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using SnakeBase;
 using SnakeBase.Snake;
@@ -9,12 +10,12 @@ namespace SnakeUserControlled
 {
     public class UserControlledSnake : BaseSnake
     {
-        protected override ISnakeHead Head { get; }
+        public override ISnakeHead Head { get; }
         protected override SnakeDistanceSence distanceSence { get; }
 
-        public UserControlledSnake(IWorld world)
+        public UserControlledSnake(IWorld world,Location initialPossition)
         {
-            Head=new UserControlledSnakeHead();
+            Head=new UserControlledSnakeHead(initialPossition);
             distanceSence=new SnakeDistanceSence(world,this);
         }
     }

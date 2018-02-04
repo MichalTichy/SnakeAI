@@ -12,18 +12,22 @@ namespace SnakeBase.Snake
 
         public bool IsAlive { get; protected set; } = true;
 
-        protected abstract ISnakeHead Head { get; }
+        public virtual ISnakeHead Head { get; }
 
         protected virtual IList<ISnakeBodyPart> Body { get; set; } = new List<ISnakeBodyPart>();
 
-        public Point HeadPossition => Head.Possition;
-        public virtual ICollection<Point> BodyPossition => Body.Select(t => t.Possition).ToArray();
+        public Location HeadPossition => Head.Possition;
+        public virtual ICollection<Location> BodyPossition => Body.Select(t => t.Possition).ToArray();
 
 
         protected abstract SnakeDistanceSence distanceSence { get; }
         
         public virtual void Move()
         {
+            if (!IsAlive)
+            {
+                return;
+            }
 
             var nextDirection = Head.Brain.DetermineNextMove();
 
@@ -81,25 +85,25 @@ namespace SnakeBase.Snake
         protected virtual void MoveUp()
         {
             MoveLastBodyPartToHeadPossition();
-            Head.Possition.Offset(0,1);
+            Head.Possition.MovePoint(0,1);
         }
 
         protected virtual void MoveDown()
         {
             MoveLastBodyPartToHeadPossition();
-            Head.Possition.Offset(0, -1);
+            Head.Possition.MovePoint(0, -1);
         }
 
         protected virtual void MoveLeft()
         {
             MoveLastBodyPartToHeadPossition();
-            Head.Possition.Offset(-1, 0);
+            Head.Possition.MovePoint(-1, 0);
         }
 
         protected virtual void MoveRight()
         {
             MoveLastBodyPartToHeadPossition();
-            Head.Possition.Offset(1, 0);
+            Head.Possition.MovePoint(1, 0);
         }
 
         protected virtual void MoveLastBodyPartToHeadPossition()

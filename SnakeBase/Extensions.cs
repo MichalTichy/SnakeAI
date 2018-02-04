@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace SnakeBase
 {
-    public static class EnumerableExtensions
+    public static class Extensions
     {
         public static TSource GetRandom<TSource>(this IEnumerable<TSource> enumerable)
         {

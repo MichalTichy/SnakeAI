@@ -14,8 +14,8 @@ namespace UnitTests
         {
             var worldSize = new Size() {Height = 1, Width = 1};
             var world = new WorldMock(worldSize);
-            world.FoodPossition=new Point(0,0);
-            var snake = new SnakeMock() {Heading = Direction.Up, HeadPossition = new Point(1, 1)};
+            world.FoodPossition=new Location(0,0);
+            var snake = new SnakeMock() {Heading = Direction.Up, HeadPossition = new Location(1, 1)};
             var distance = new SnakeDistanceSence(world, snake);
 
             Assert.AreEqual(null, distance.DistanceToFoodAhead());
@@ -29,8 +29,8 @@ namespace UnitTests
         {
             var worldSize = new Size() {Height = 4, Width = 4};
             var world = new WorldMock(worldSize);
-            world.FoodPossition=new Point(0,1);
-            var snake = new SnakeMock() {Heading = Direction.Up, HeadPossition = new Point(1, 1)};
+            world.FoodPossition=new Location(0,1);
+            var snake = new SnakeMock() {Heading = Direction.Up, HeadPossition = new Location(1, 1)};
             var distance = new SnakeDistanceSence(world, snake);
 
             Assert.AreEqual(null, distance.DistanceToFoodAhead());
@@ -44,8 +44,8 @@ namespace UnitTests
         {
             var worldSize = new Size() {Height = 1, Width = 1};
             var world = new WorldMock(worldSize);
-            world.FoodPossition=new Point(1,1);
-            var snake = new SnakeMock() {Heading = Direction.Up, HeadPossition = new Point(1, 1)};
+            world.FoodPossition=new Location(1,1);
+            var snake = new SnakeMock() {Heading = Direction.Up, HeadPossition = new Location(1, 1)};
             var distance = new SnakeDistanceSence(world, snake);
 
             Assert.AreEqual(0, distance.DistanceToFoodAhead());
@@ -59,8 +59,8 @@ namespace UnitTests
         {
             var worldSize = new Size() {Height = 4, Width = 4};
             var world = new WorldMock(worldSize);
-            world.FoodPossition=new Point(0,1);
-            var snake = new SnakeMock() {Heading = Direction.Down, HeadPossition = new Point(1, 1)};
+            world.FoodPossition=new Location(0,1);
+            var snake = new SnakeMock() {Heading = Direction.Down, HeadPossition = new Location(1, 1)};
             var distance = new SnakeDistanceSence(world, snake);
 
             Assert.AreEqual(null, distance.DistanceToFoodAhead());
@@ -74,8 +74,8 @@ namespace UnitTests
         {
             var worldSize = new Size() {Height = 4, Width = 4};
             var world = new WorldMock(worldSize);
-            world.FoodPossition=new Point(0,1);
-            var snake = new SnakeMock() {Heading = Direction.Right, HeadPossition = new Point(1, 1)};
+            world.FoodPossition=new Location(0,1);
+            var snake = new SnakeMock() {Heading = Direction.Right, HeadPossition = new Location(1, 1)};
             var distance = new SnakeDistanceSence(world, snake);
 
             Assert.AreEqual(null, distance.DistanceToFoodAhead());
@@ -89,8 +89,8 @@ namespace UnitTests
         {
             var worldSize = new Size() {Height = 4, Width = 4};
             var world = new WorldMock(worldSize);
-            world.FoodPossition=new Point(0,1);
-            var snake = new SnakeMock() {Heading = Direction.Left, HeadPossition = new Point(1, 1)};
+            world.FoodPossition=new Location(0,1);
+            var snake = new SnakeMock() {Heading = Direction.Left, HeadPossition = new Location(1, 1)};
             var distance = new SnakeDistanceSence(world, snake);
 
             Assert.AreEqual(1, distance.DistanceToFoodAhead());

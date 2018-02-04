@@ -10,10 +10,11 @@ namespace UnitTests
 {
     public class SnakeMock: ISnake
     {
+        public ISnakeHead Head { get; }
         public Direction Heading { get; set; }
         public bool IsAlive { get; }
-        public Point HeadPossition { get; set; }
-        public ICollection<Point> BodyPossition { get; set; }
+        public Location HeadPossition { get; set; }
+        public ICollection<Location> BodyPossition { get; set; }
 
         public void Grow()
         {

@@ -6,9 +6,9 @@ using SnakeBase.Snake;
 
 namespace SnakeUserControlled
 {
-    public class UserControlledSnakeBeain : IBrain
+    public class UserControlledSnakeBrain : IBrain
     {
-        protected Direction nextMove;
+        protected Direction nextMove=Direction.Right;
         public Direction DetermineNextMove()
         {
             return nextMove;

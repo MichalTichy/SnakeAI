@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace SnakeAI
+namespace SnakeAI.Snake
 {
     public class Snake : ISnake
     {
@@ -17,9 +17,9 @@ namespace SnakeAI
 
         protected IList<SnakeBodyPart> Body;
 
-        protected readonly World world;
+        protected readonly World.World world;
         
-        public Snake(Point initialPossition, World world)
+        public Snake(Point initialPossition, World.World world)
         {
             this.world = world;
             Head = new SnakeHead(initialPossition);

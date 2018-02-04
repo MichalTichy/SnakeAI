@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
+using SnakeAI.Snake;
 
-namespace SnakeAI
+namespace SnakeAI.World
 {
     public class World : IWorld
     {

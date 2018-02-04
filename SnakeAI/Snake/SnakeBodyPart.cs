@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace SnakeAI
+namespace SnakeAI.Snake
 {
     public class SnakeBodyPart
     {

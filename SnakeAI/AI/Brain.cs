@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace SnakeAI
+namespace SnakeAI.AI
 {
-    public class SnakeBrain
+    public class Brain
     {
 
-        public SnakeBrain()
+        public Brain()
         {
         }
 

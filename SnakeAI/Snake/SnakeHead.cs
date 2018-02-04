@@ -1,14 +1,15 @@
-﻿using System.Drawing;
+using System.Drawing;
+using SnakeAI.AI;
 
-namespace SnakeAI
+namespace SnakeAI.Snake
 {
     public class SnakeHead : SnakeBodyPart
     {
-        public SnakeBrain Brain { get; set; }
+        public Brain Brain { get; set; }
 
         public SnakeHead(Point possition) : base(possition)
         {
-            Brain = new SnakeBrain();
+            Brain = new Brain();
         }
 
 

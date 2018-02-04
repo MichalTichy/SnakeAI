@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using SnakeAI.Snake;
+using SnakeAI.World;
 
 namespace SnakeAI
 {

@@ -5,11 +5,11 @@ namespace SnakeAI.Snake
 {
     public class SnakeHead : SnakeBodyPart
     {
-        public Brain Brain { get; set; }
+        public SnakeBrain SnakeBrain { get; set; }
 
-        public SnakeHead(Point possition) : base(possition)
+        public SnakeHead(Point possition, Genome genome, SnakeDistanceSence snakeDistanceSence) : base(possition)
         {
-            Brain = new Brain();
+            SnakeBrain = new SnakeBrain(genome,snakeDistanceSence);
         }
 
 

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using SnakeAI.AI;
 
 namespace SnakeAI.Snake
 {
     public class Snake : ISnake
     {
+        public Genome Genome { get; }
         public Direction Heading => DetermineHeading();
 
         public bool IsAlive { get; protected set; } = true;
@@ -17,19 +19,20 @@ namespace SnakeAI.Snake
 
         protected IList<SnakeBodyPart> Body;
 
-        protected readonly World.World world;
+        protected readonly SnakeDistanceSence distanceSence;
         
-        public Snake(Point initialPossition, World.World world)
+        public Snake(Point initialPossition,Genome genome, World.World world)
         {
-            this.world = world;
-            Head = new SnakeHead(initialPossition);
+            Genome = genome;
+            distanceSence = new SnakeDistanceSence(world,this);
+            Head = new SnakeHead(initialPossition,genome,distanceSence);
             Body = new List<SnakeBodyPart>();
         }
 
         public virtual void Move()
         {
 
-            var nextDirection = Head.Brain.DetermineNextMove();
+            var nextDirection = Head.SnakeBrain.DetermineNextMove();
 
             switch (nextDirection)
             {
@@ -67,8 +70,7 @@ namespace SnakeAI.Snake
 
         protected virtual void KillSnakeIfWallCollisionIsDetected()
         {
-            if (Head.Possition.X < 0 || Head.Possition.X > world.Size.Width ||
-                Head.Possition.Y < 0 || Head.Possition.Y > world.Size.Height)
+            if (distanceSence.DidColidedWithWall())
                 KillSnake();
         }
 

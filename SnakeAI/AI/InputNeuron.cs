@@ -1,12 +1,22 @@
-﻿namespace SnakeAI.AI
+﻿using System;
+
+namespace SnakeAI.AI
 {
     public class InputNeuron : INeuron
     {
-        public double Value { get; protected set; }
+        protected readonly Func<int?> valueFunc;
+        public double Value => GetValue();
 
-        public virtual void Setvalue(float value)
+        protected virtual double GetValue()
         {
-            Value = value;
+            var value = valueFunc();
+            return value ?? double.MaxValue;
         }
+
+        public InputNeuron(Func<int?> valueFunc)
+        {
+            this.valueFunc = valueFunc;
+        }
+        
     }
 }

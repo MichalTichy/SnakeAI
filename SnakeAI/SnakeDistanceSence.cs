@@ -1,35 +1,58 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using SnakeAI.Snake;
 using SnakeAI.World;
 
 namespace SnakeAI
 {
-    public class Distance
+    public class SnakeDistanceSence : IDistanceSence
     {
         private readonly IWorld world;
         private readonly ISnake snake;
 
-        public int? DistanceToWallAhead => CalcDistanceToWallAhead();
-        public int? DistanceToWallBehind => CalcDistanceToWallBehind();
-        public int? DistanceToWallRight => CalcDistanceToWallRight();
-        public int? DistanceToWallLeft => CalcDistanceToWallLeft();
+        public Func<int?> DistanceToWallAhead => CalcDistanceToWallAhead;
+        public Func<int?> DistanceToWallBehind => CalcDistanceToWallBehind;
+        public Func<int?> DistanceToWallRight => CalcDistanceToWallRight;
+        public Func<int?> DistanceToWallLeft => CalcDistanceToWallLeft;
+               
+        public Func<int?> DistanceToFoodAhead => CalcDistanceToFoodAhead;
+        public Func<int?> DistanceToFoodBehind => CalcDistanceToFoodBehind;
+        public Func<int?> DistanceToFoodRight => CalcDistanceToFoodRight;
+        public Func<int?> DistanceToFoodLeft => CalcDistanceToFoodLeft;
+               
+        public Func<int?> DistanceToBodyAhead => CalcDistanceToBodyAhead;
+        public Func<int?> DistanceToBodyBehind => CalcDistanceToBodyBehind;
+        public Func<int?> DistanceToBodyRight => CalcDistanceToBodyRight;
+        public Func<int?> DistanceToBodyLeft => CalcDistanceToBodyLeft;
 
-        public int? DistanceToFoodAhead => CalcDistanceToFoodAhead();
-        public int? DistanceToFoodBehind => CalcDistanceToFoodBehind();
-        public int? DistanceToFoodRight => CalcDistanceToFoodRight();
-        public int? DistanceToFoodLeft => CalcDistanceToFoodLeft();
+        public Func<int?>[] InputFunctions => new Func<int?>[]
+        {
+            CalcDistanceToBodyAhead,
+            CalcDistanceToWallBehind,
+            CalcDistanceToWallRight,
+            CalcDistanceToWallLeft,
+            CalcDistanceToFoodAhead,
+            CalcDistanceToFoodBehind,
+            CalcDistanceToFoodRight,
+            CalcDistanceToFoodLeft,
+            CalcDistanceToBodyAhead,
+            CalcDistanceToBodyBehind,
+            CalcDistanceToBodyRight,
+            CalcDistanceToBodyLeft
+        };
 
-        public int? DistanceToBodyAhead => CalcDistanceToBodyAhead();
-        public int? DistanceToBodyBehind => CalcDistanceToBodyBehind();
-        public int? DistanceToBodyRight => CalcDistanceToBodyRight();
-        public int? DistanceToBodyLeft => CalcDistanceToBodyLeft();
-
-        public Distance(IWorld world,ISnake snake)
+        public SnakeDistanceSence(IWorld world,ISnake snake)
         {
             this.world = world;
             this.snake = snake;
+        }
+
+        public bool DidColidedWithWall()
+        {
+            return snake.HeadPossition.X < 0 || snake.HeadPossition.X > world.Size.Width ||
+                   snake.HeadPossition.Y < 0 || snake.HeadPossition.Y > world.Size.Height;
         }
 
         #region Walls

@@ -38,7 +38,7 @@ namespace SnakeAI.World
         protected void GenerateNextFood()
         {
             var random = new Random();
-            FoodPossition = new Point(random.Next(Size.Width), random.Next(Size.Height));
+            FoodPossition = new Point(random.Next(Size.Width+1), random.Next(Size.Height+1));
         }
     }
 }

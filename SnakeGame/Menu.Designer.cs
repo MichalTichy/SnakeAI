@@ -31,6 +31,7 @@
             this.worldSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.butStartUserControlled = new System.Windows.Forms.Button();
+            this.chDebug = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.worldSizeNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,11 +71,22 @@
             this.butStartUserControlled.UseVisualStyleBackColor = true;
             this.butStartUserControlled.Click += new System.EventHandler(this.butStartUserControlled_Click);
             // 
+            // chDebug
+            // 
+            this.chDebug.AutoSize = true;
+            this.chDebug.Location = new System.Drawing.Point(282, 89);
+            this.chDebug.Name = "chDebug";
+            this.chDebug.Size = new System.Drawing.Size(58, 17);
+            this.chDebug.TabIndex = 3;
+            this.chDebug.Text = "Debug";
+            this.chDebug.UseVisualStyleBackColor = true;
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(352, 118);
+            this.Controls.Add(this.chDebug);
             this.Controls.Add(this.butStartUserControlled);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.worldSizeNumericUpDown);
@@ -92,6 +104,7 @@
         private System.Windows.Forms.NumericUpDown worldSizeNumericUpDown;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button butStartUserControlled;
+        private System.Windows.Forms.CheckBox chDebug;
     }
 }
 

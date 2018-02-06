@@ -84,6 +84,7 @@
             this.Controls.Add(this.butDown);
             this.Controls.Add(this.butUp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Name = "SnakeHandControl";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SnakeHandControl";

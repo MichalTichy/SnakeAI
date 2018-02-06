@@ -85,16 +85,16 @@ namespace SnakeGame
         {
             switch (e.KeyCode)
             {
-                case Keys.Up:
+                case Keys.W:
                     GoUp();
                     break;
-                case Keys.Down:
+                case Keys.S:
                     GoDown();
                     break;
-                case Keys.Left:
+                case Keys.A:
                     GoLeft();
                     break;
-                case Keys.Right:
+                case Keys.D:
                     GoRight();
                     break;
             }

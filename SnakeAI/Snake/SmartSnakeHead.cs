@@ -15,7 +15,7 @@ namespace SnakeAI.Snake
 
         public SmartSnakeHead(Location initialPossition, Genome genome, SnakeDistanceSence distanceSence)
         {
-            Possition = initialPossition;
+            Possition = initialPossition.Copy();
             Brain=new SmartSnakeBrain(genome,distanceSence);
         }
     }

@@ -15,13 +15,16 @@ namespace SnakeGame
 {
     public partial class GameVisualization : Form
     {
+        protected readonly bool debug;
+
         private readonly IWorld _world;
         private readonly ICollection<ISnake> _snakes;
         private const int pointSize = 10;
-        public GameVisualization(IWorld world,ICollection<ISnake> snakes)
+        public GameVisualization(IWorld world,ICollection<ISnake> snakes, bool debug = false)
         {
             _world = world;
             _snakes = snakes;
+            this.debug = debug;
             InitializeComponent();
 
             InitGameBoard();
@@ -48,7 +51,13 @@ namespace SnakeGame
 
             foreach (var snake in _snakes)
                 DrawSnake(graphics, snake);
+
+            if (debug)
+            {
+                DrawGrid(graphics);
+            }
         }
+
 
         private void DrawSnake(Graphics graphics,ISnake snake)
         {
@@ -69,6 +78,21 @@ namespace SnakeGame
             graphics.FillRectangle(brush,TransferPointToRectangle(_world.FoodPossition));
         }
 
+        private void DrawGrid(Graphics graphics)
+        {
+            for (int i = 0; i < _world.Size.Height; i++)
+            {
+                var pen=new Pen(Color.White);
+                graphics.DrawLine(pen,new Point(0,i*pointSize),new Point(_world.Size.Width*pointSize,i*pointSize) );
+            }
+
+            for (int i = 0; i < _world.Size.Width; i++)
+            {
+                var pen = new Pen(Color.White);
+                graphics.DrawLine(pen, new Point(i * pointSize,0), new Point(i * pointSize,_world.Size.Height*pointSize));
+            }
+        }
+
         private Rectangle TransferPointToRectangle(Location location)
         {
             return new Rectangle(location.X*pointSize,location.Y*pointSize,pointSize, pointSize);
@@ -77,6 +101,10 @@ namespace SnakeGame
         private void butStart_Click(object sender, EventArgs e)
         {
             butStart.Visible = false;
+            if (debug)
+            {
+                GameUpdate.Interval = 1000;
+            }
             GameUpdate.Start();
         }
 

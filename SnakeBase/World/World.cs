@@ -56,7 +56,7 @@ namespace SnakeBase.World
         protected void GenerateNextFood()
         {
             var random = new Random();
-            FoodPossition = new Location(random.Next(Size.Width+1), random.Next(Size.Height+1));
+            FoodPossition = new Location(random.Next(Size.Width), random.Next(Size.Height));
         }
     }
 }

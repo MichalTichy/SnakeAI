@@ -8,7 +8,20 @@ namespace SnakeBase.Snake
 {
     public abstract class BaseSnake : ISnake
     {
-        public Direction Heading => DetermineHeading();
+        protected Direction _heading;
+
+        public Direction Heading
+        {
+            get
+            {
+                var newHeading = TryToDeterimineHeading();
+                if (newHeading.HasValue)
+                {
+                    _heading = newHeading.Value;
+                }
+                return _heading;
+            }
+        }
 
         public bool IsAlive { get; protected set; } = true;
 
@@ -17,10 +30,15 @@ namespace SnakeBase.Snake
         protected virtual IList<ISnakeBodyPart> Body { get; set; } = new List<ISnakeBodyPart>();
 
         public Location HeadPossition => Head.Possition;
+        protected Location PreviousHeadPossition { get; set; }
         public virtual ICollection<Location> BodyPossition => Body.Select(t => t.Possition).ToArray();
 
 
         protected abstract SnakeDistanceSence distanceSence { get; }
+
+        public BaseSnake()
+        {
+        }
         
         public virtual void Move()
         {
@@ -30,6 +48,7 @@ namespace SnakeBase.Snake
             }
 
             var nextDirection = Head.Brain.DetermineNextMove();
+            PreviousHeadPossition = HeadPossition.Copy();
 
             switch (nextDirection)
             {
@@ -46,14 +65,14 @@ namespace SnakeBase.Snake
                     MoveRight();
                     break;
             }
-
             KillSnakeIfCollisionWasdetected();
         }
 
         public virtual void Grow()
         {
-            var tailPossition = Body.Last().Possition;
-            Body.Add(new SnakeBodyPart(tailPossition));
+            var lastBodyPart = Body.Count==0 ? Head : Body.Last();
+            var tailPossition = lastBodyPart.Possition;
+            Body.Insert(0,new SnakeBodyPart(tailPossition.Copy()));
         }
 
         protected virtual void KillSnakeIfCollisionWasdetected()
@@ -84,57 +103,55 @@ namespace SnakeBase.Snake
 
         protected virtual void MoveUp()
         {
-            MoveLastBodyPartToHeadPossition();
-            Head.Possition.MovePoint(0,1);
+            UpdateBody();
+            Head.Possition.MovePoint(0,-1);
         }
 
         protected virtual void MoveDown()
         {
-            MoveLastBodyPartToHeadPossition();
-            Head.Possition.MovePoint(0, -1);
+            UpdateBody();
+            Head.Possition.MovePoint(0, +1);
         }
 
         protected virtual void MoveLeft()
         {
-            MoveLastBodyPartToHeadPossition();
+            UpdateBody();
             Head.Possition.MovePoint(-1, 0);
         }
 
         protected virtual void MoveRight()
         {
-            MoveLastBodyPartToHeadPossition();
+            UpdateBody();
             Head.Possition.MovePoint(1, 0);
         }
 
-        protected virtual void MoveLastBodyPartToHeadPossition()
+        protected virtual void UpdateBody()
         {
             if (Body.Count == 0)
                 return;
 
-            Body.Add(new SnakeBodyPart(HeadPossition));
-            Body.RemoveAt(Body.Count-1);
+            Body.Add(new SnakeBodyPart(HeadPossition.Copy()));
+            Body.RemoveAt(0);
         }
         
-        protected virtual Direction DetermineHeading()
+        protected virtual Direction? TryToDeterimineHeading()
         {
-            if (Body.Count == 0)
+            if (PreviousHeadPossition ==null)
                 return Direction.Up;
 
-            var firstBodyPart = Body.Last();
-
-            if (firstBodyPart.Possition.X < HeadPossition.X)
+            if (PreviousHeadPossition.X < HeadPossition.X)
                 return Direction.Right;
 
-            if (firstBodyPart.Possition.X > HeadPossition.X)
+            if (PreviousHeadPossition.X > HeadPossition.X)
                 return Direction.Left;
 
-            if (firstBodyPart.Possition.Y > HeadPossition.Y)
-                return Direction.Down;
-
-            if (firstBodyPart.Possition.Y < HeadPossition.Y)
+            if (PreviousHeadPossition.Y > HeadPossition.Y)
                 return Direction.Up;
 
-            throw new Exception("Unable to determine snake heading");
+            if (PreviousHeadPossition.Y < HeadPossition.Y)
+                return Direction.Down;
+
+            return null;
         }
     }
 }

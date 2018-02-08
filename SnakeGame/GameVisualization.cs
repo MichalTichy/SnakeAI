@@ -20,15 +20,20 @@ namespace SnakeGame
         private readonly IWorld _world;
         private readonly ICollection<ISnake> _snakes;
         private const int pointSize = 10;
-        public GameVisualization(IWorld world,ICollection<ISnake> snakes, bool debug = false)
+        public GameVisualization(IWorld world,ICollection<ISnake> snakes, bool debug = false,int speed=250)
         {
             _world = world;
             _snakes = snakes;
             this.debug = debug;
+
             InitializeComponent();
+
+            GameUpdate.Interval = speed;
 
             InitGameBoard();
         }
+
+        public bool IsRunning => GameUpdate.Enabled;
 
         private void InitGameBoard()
         {
@@ -37,6 +42,10 @@ namespace SnakeGame
 
         private void GameUpdate_Tick(object sender, EventArgs e)
         {
+            if (!_snakes.Any(t=>t.IsAlive))
+            {
+                GameUpdate.Stop();
+            }
             _world.PerformGameStep();
             Refresh();
         }
@@ -98,14 +107,14 @@ namespace SnakeGame
             return new Rectangle(location.X*pointSize,location.Y*pointSize,pointSize, pointSize);
         }
 
-        private void butStart_Click(object sender, EventArgs e)
+        public void Start()
         {
-            butStart.Visible = false;
-            if (debug)
-            {
-                GameUpdate.Interval = 1000;
-            }
             GameUpdate.Start();
+        }
+
+        public void Stop()
+        {
+            GameUpdate.Stop();
         }
 
         private void GameVisualization_Paint(object sender, PaintEventArgs e)

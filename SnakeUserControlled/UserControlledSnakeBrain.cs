@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using SnakeBase;
 using SnakeBase.Snake;
@@ -8,30 +9,37 @@ namespace SnakeUserControlled
 {
     public class UserControlledSnakeBrain : IBrain
     {
-        protected Direction nextMove=Direction.Right;
+        protected Queue<Direction> nextMoves=new Queue<Direction>();
+        protected Direction last=Direction.Right;
         public Direction DetermineNextMove()
         {
-            return nextMove;
+            Direction next;
+            if (nextMoves.Any())
+                next = nextMoves.Dequeue();
+            else
+                next = last;
+            last = next;
+            return next;
         }
 
         public void GoUp()
         {
-            nextMove = Direction.Up;
+            nextMoves.Enqueue(Direction.Up);
         }
 
         public void GoDown()
         {
-            nextMove = Direction.Down;
+            nextMoves.Enqueue(Direction.Down);
         }
 
         public void GoLeft()
         {
-            nextMove = Direction.Left;
+            nextMoves.Enqueue(Direction.Left);
         }
 
         public void GoRight()
         {
-            nextMove = Direction.Right;
+            nextMoves.Enqueue(Direction.Right);
         }
     }
 }

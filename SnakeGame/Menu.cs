@@ -35,7 +35,7 @@ namespace SnakeGame
 
             var controlsPossition=new Point(display.Location.X,display.Location.Y+display.Size.Height);
             var snake = snakes.First();
-            var controls=new SnakeHandControl(controlsPossition,snake);
+            var controls=new SnakeHandControl(controlsPossition,snake,display);
             controls.Show();
 
             if (chDebug.Checked)

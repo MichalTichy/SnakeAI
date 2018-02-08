@@ -15,11 +15,14 @@ namespace SnakeGame
 {
     public partial class SnakeHandControl : Form
     {
+        protected readonly GameVisualization _gameVisualization;
         protected UserControlledSnakeBrain SnakeBrain;
-        public SnakeHandControl(Point possition,ISnake snake)
+
+        public SnakeHandControl(Point possition,ISnake snake,GameVisualization gameVisualization)
         {
             if (!(snake.Head.Brain is UserControlledSnakeBrain brain))
                 throw new Exception($"Only snakes with {nameof(UserControlledSnakeBrain)} brain can be controlled.");
+            _gameVisualization = gameVisualization;
 
             SnakeBrain = brain;
 
@@ -98,6 +101,14 @@ namespace SnakeGame
                     GoRight();
                     break;
             }
+        }
+
+        private void butStartPause_Click(object sender, EventArgs e)
+        {
+            if (!_gameVisualization.IsRunning)
+                _gameVisualization.Start();
+            else
+                _gameVisualization.Stop();
         }
     }
 }

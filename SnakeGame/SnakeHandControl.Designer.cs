@@ -32,11 +32,12 @@
             this.butDown = new System.Windows.Forms.Button();
             this.butLeft = new System.Windows.Forms.Button();
             this.butRight = new System.Windows.Forms.Button();
+            this.butStartPause = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // butUp
             // 
-            this.butUp.Location = new System.Drawing.Point(12, 12);
+            this.butUp.Location = new System.Drawing.Point(12, 67);
             this.butUp.Name = "butUp";
             this.butUp.Size = new System.Drawing.Size(120, 50);
             this.butUp.TabIndex = 0;
@@ -46,7 +47,7 @@
             // 
             // butDown
             // 
-            this.butDown.Location = new System.Drawing.Point(12, 124);
+            this.butDown.Location = new System.Drawing.Point(12, 179);
             this.butDown.Name = "butDown";
             this.butDown.Size = new System.Drawing.Size(120, 50);
             this.butDown.TabIndex = 1;
@@ -56,7 +57,7 @@
             // 
             // butLeft
             // 
-            this.butLeft.Location = new System.Drawing.Point(12, 68);
+            this.butLeft.Location = new System.Drawing.Point(12, 123);
             this.butLeft.Name = "butLeft";
             this.butLeft.Size = new System.Drawing.Size(50, 50);
             this.butLeft.TabIndex = 2;
@@ -66,7 +67,7 @@
             // 
             // butRight
             // 
-            this.butRight.Location = new System.Drawing.Point(82, 68);
+            this.butRight.Location = new System.Drawing.Point(82, 123);
             this.butRight.Name = "butRight";
             this.butRight.Size = new System.Drawing.Size(50, 50);
             this.butRight.TabIndex = 3;
@@ -74,11 +75,22 @@
             this.butRight.UseVisualStyleBackColor = true;
             this.butRight.Click += new System.EventHandler(this.butRight_Click);
             // 
+            // butStartPause
+            // 
+            this.butStartPause.Location = new System.Drawing.Point(12, 11);
+            this.butStartPause.Name = "butStartPause";
+            this.butStartPause.Size = new System.Drawing.Size(120, 50);
+            this.butStartPause.TabIndex = 4;
+            this.butStartPause.Text = "Start / Pause";
+            this.butStartPause.UseVisualStyleBackColor = true;
+            this.butStartPause.Click += new System.EventHandler(this.butStartPause_Click);
+            // 
             // SnakeHandControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(150, 191);
+            this.ClientSize = new System.Drawing.Size(150, 242);
+            this.Controls.Add(this.butStartPause);
             this.Controls.Add(this.butRight);
             this.Controls.Add(this.butLeft);
             this.Controls.Add(this.butDown);
@@ -99,5 +111,6 @@
         private System.Windows.Forms.Button butDown;
         private System.Windows.Forms.Button butLeft;
         private System.Windows.Forms.Button butRight;
+        private System.Windows.Forms.Button butStartPause;
     }
 }

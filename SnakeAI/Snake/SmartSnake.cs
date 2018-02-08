@@ -10,11 +10,16 @@ namespace SnakeAI.Snake
 {
     public class SmartSnake:BaseSnake
     {
+        public readonly Genome Genome;
         public override ISnakeHead Head { get; }
         protected sealed override SnakeDistanceSence distanceSence { get; }
 
-        public SmartSnake(Location initialPossition,IWorld world,Genome genome)
+        public SmartSnake(Location initialPossition,IWorld world,Genome genome=null)
         {
+            Genome = genome;
+            if (genome == null)
+                genome = new Genome();
+
             distanceSence=new SnakeDistanceSence(world,this);
             Head=new SmartSnakeHead(initialPossition,genome,distanceSence);
         }

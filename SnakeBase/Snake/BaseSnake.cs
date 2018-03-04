@@ -23,18 +23,17 @@ namespace SnakeBase.Snake
             }
         }
 
-        public bool IsAlive { get; protected set; } = true;
+        public bool IsAlive { get; protected set; } = false;
 
-        public virtual ISnakeHead Head { get; }
+        public virtual ISnakeHead Head { get; protected set; }
 
         protected virtual IList<ISnakeBodyPart> Body { get; set; } = new List<ISnakeBodyPart>();
 
         public Location HeadPossition => Head.Possition;
         protected Location PreviousHeadPossition { get; set; }
         public virtual ICollection<Location> BodyPossition => Body.Select(t => t.Possition).ToArray();
-
-
-        protected abstract SnakeDistanceSence distanceSence { get; }
+        
+        protected abstract SnakeDistanceSence distanceSence { get; set; }
 
         public BaseSnake()
         {
@@ -47,7 +46,7 @@ namespace SnakeBase.Snake
                 return;
             }
 
-            var nextDirection = Head.Brain.DetermineNextMove();
+            var nextDirection = TranslateDirectionAccordingToheading(Head.Brain.DetermineNextMove());
             PreviousHeadPossition = HeadPossition.Copy();
 
             switch (nextDirection)
@@ -66,6 +65,55 @@ namespace SnakeBase.Snake
                     break;
             }
             KillSnakeIfCollisionWasdetected();
+        }
+
+        protected Direction TranslateDirectionAccordingToheading(Direction direction)
+        {
+            switch (Heading)
+            {
+                case Direction.Up:
+                    return direction;
+                case Direction.Down:
+                    switch (direction)
+                    {
+                        case Direction.Up:
+                            return Direction.Down;
+                        case Direction.Down:
+                            return Direction.Up;
+                        case Direction.Left:
+                            return Direction.Right;
+                        case Direction.Right:
+                            return Direction.Left;
+                    }
+                    break;
+                case Direction.Left:
+                    switch (direction)
+                    {
+                        case Direction.Up:
+                            return Direction.Left;
+                        case Direction.Down:
+                            return Direction.Right;
+                        case Direction.Left:
+                            return Direction.Down;
+                        case Direction.Right:
+                            return Direction.Up;
+                    }
+                    break;
+                case Direction.Right:
+                    switch (direction)
+                    {
+                        case Direction.Up:
+                            return Direction.Right;
+                        case Direction.Down:
+                            return Direction.Left;
+                        case Direction.Left:
+                            return Direction.Up;
+                        case Direction.Right:
+                            return Direction.Down;
+                    }
+                    break;
+            }
+            throw new InvalidOperationException();
         }
 
         public virtual void Grow()
@@ -153,5 +201,12 @@ namespace SnakeBase.Snake
 
             return null;
         }
+        
+        public virtual int CalcFitness()
+        {
+            var fitness = 1 + BodyPossition.Count*10;
+            return fitness;
+        }
+        public abstract void Born(IWorld world,Location initialPossition);
     }
 }

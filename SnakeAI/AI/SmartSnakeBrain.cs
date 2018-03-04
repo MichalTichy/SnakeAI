@@ -12,7 +12,7 @@ namespace SnakeAI.AI
         private readonly SnakeDistanceSence distanceSence;
         
         protected override int InputNeuronsCount => 12;
-        protected override int HiddenNeuronsCount => 12;
+        protected override int HiddenNeuronsCount => 8;
         protected override int OutputNeuronsCount => 4;
 
         protected INeuron UpNeuron { get; set; }
@@ -41,8 +41,8 @@ namespace SnakeAI.AI
 
             var values = new[] {UpNeuronValue, DownNeuronValue, RightNeuronValue, LeftNeuronValue};
 
-            var max = values.OrderBy(t => t).Last();
-
+            var max = values.Max();
+ 
             if (Math.Abs(UpNeuronValue - max) < 0.000000001)
                 return Direction.Up;
             if (Math.Abs(DownNeuronValue - max) < 0.000000001)
@@ -95,7 +95,7 @@ namespace SnakeAI.AI
             for (int i = 0; i < OutputNeuronsCount; i++)
             {
                 var newNeuron=new Neuron();
-                outputs.Add(new Neuron());
+                outputs.Add(newNeuron);
                 foreach (var neuron in hiddenNeurons)
                     newNeuron.Connect(neuron, genome.Genes[currentGene++]);
             }

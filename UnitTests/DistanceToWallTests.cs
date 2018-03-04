@@ -58,10 +58,10 @@ namespace UnitTests
             var snake = new SnakeMock() { Heading = Direction.Down, HeadPossition = new Location(1, 1) };
             var distance = new SnakeDistanceSence(world,snake);
             
-            Assert.AreEqual(1,distance.DistanceToWallAhead());
+            Assert.AreEqual(2,distance.DistanceToWallAhead());
             Assert.AreEqual(1,distance.DistanceToWallRight());
             Assert.AreEqual(2,distance.DistanceToWallLeft());
-            Assert.AreEqual(2,distance.DistanceToWallBehind());
+            Assert.AreEqual(1,distance.DistanceToWallBehind());
         }
 
         [TestMethod,TestCategory("Heading DOWN")]
@@ -72,7 +72,7 @@ namespace UnitTests
             var snake = new SnakeMock() { Heading = Direction.Down, HeadPossition = new Location(0, 0) };
             var distance = new SnakeDistanceSence(world,snake);
             
-            Assert.AreEqual(0,distance.DistanceToWallAhead());
+            Assert.AreEqual(3,distance.DistanceToWallAhead());
             Assert.AreEqual(0,distance.DistanceToWallRight());
             Assert.AreEqual(3,distance.DistanceToWallLeft());
             Assert.AreEqual(3,distance.DistanceToWallBehind());

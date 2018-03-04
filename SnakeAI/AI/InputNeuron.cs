@@ -10,7 +10,7 @@ namespace SnakeAI.AI
         protected virtual double GetValue()
         {
             var value = valueFunc();
-            return value ?? double.MaxValue;
+            return value ?? 0;
         }
 
         public InputNeuron(Func<int?> valueFunc)

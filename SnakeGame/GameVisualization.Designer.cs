@@ -44,7 +44,7 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "GameVisualization";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "GameVisualization";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameVisualization_Paint);
             this.ResumeLayout(false);

@@ -5,6 +5,7 @@ using SnakeAI;
 using SnakeAI.Snake;
 using SnakeBase;
 using SnakeBase.Snake;
+using SnakeBase.World;
 
 namespace UnitTests
 {
@@ -15,6 +16,11 @@ namespace UnitTests
         public bool IsAlive { get; }
         public Location HeadPossition { get; set; }
         public ICollection<Location> BodyPossition { get; set; }
+        
+        public void Born(IWorld world, Location initialLocation)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Grow()
         {
@@ -22,6 +28,11 @@ namespace UnitTests
         }
 
         public void Move()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int CalcFitness()
         {
             throw new NotImplementedException();
         }

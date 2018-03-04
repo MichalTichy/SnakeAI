@@ -51,6 +51,7 @@
     <Compile Include="DebugView.Designer.cs">
       <DependentUpon>DebugView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Evolution.cs" />
     <Compile Include="GameVisualization.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +108,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SnakeAI\SnakeAI.csproj">
+      <Project>{E56548A6-E925-415C-A4EC-0CB62099C5F5}</Project>
+      <Name>SnakeAI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SnakeBase\SnakeBase.csproj">
       <Project>{47C9C0E5-5ED9-4F9E-870D-A521AE9354BF}</Project>
       <Name>SnakeBase</Name>

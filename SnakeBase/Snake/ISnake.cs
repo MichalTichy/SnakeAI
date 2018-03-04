@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using SnakeBase.World;
 
 namespace SnakeBase.Snake
 {
@@ -10,7 +11,9 @@ namespace SnakeBase.Snake
         bool IsAlive { get;}
         Location HeadPossition { get; }
         ICollection<Location> BodyPossition { get; }
+        void Born(IWorld world,Location initialLocation);
         void Grow();
         void Move();
+        int CalcFitness();
     }
 }

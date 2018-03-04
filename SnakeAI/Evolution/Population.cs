@@ -13,36 +13,31 @@ namespace SnakeAI.Evolution
     public class Population
     {
         private readonly int populationSize;
-        public IWorld world { get; protected set; }
         protected List<SmartSnake> _snakes { get; set; } = new List<SmartSnake>();
         public IReadOnlyCollection<SmartSnake> Snakes => _snakes.AsReadOnly();
 
         public Population(int populationSize,Size worldSize)
         {
             this.populationSize = populationSize;
-            this.world = new World(worldSize);
             for (int i = 0; i < populationSize; i++)
             {
-                _snakes.Add(new SmartSnake(GenerateInitialLocation(),world));
+                _snakes.Add(new SmartSnake());
             }
         }
 
-        public Population(List<SmartSnake> snakes, Size worldSize)
+        public Population(ICollection<SmartSnake> snakes)
         {
-            this._snakes = snakes;
+            this._snakes = snakes.ToList();
             this.populationSize = snakes.Count;
-            this.world=new World(worldSize);
         }
 
         public Population Evolve()
         {
-            var snakes=new List<SmartSnake>();
-
             var selectedSnakes = Selection();
 
             var newSnakes = Crossover(selectedSnakes);
 
-            return new Population(snakes,world.Size);
+            return new Population(newSnakes);
         }
 
         protected virtual ICollection<SmartSnake> Selection()
@@ -52,7 +47,7 @@ namespace SnakeAI.Evolution
             var source=new List<SmartSnake>();
             foreach (var snake in Snakes)
             {
-                for (int i = 0; i < CalcFitness(snake); i++)
+                for (int i = 0; i < snake.CalcFitness(); i++)
                 {
                     source.Add(snake);
                 }
@@ -77,21 +72,10 @@ namespace SnakeAI.Evolution
                 var parent1 = snakes.ElementAt(random.Next(snakes.Count));
                 var parent2 = snakes.ElementAt(random.Next(snakes.Count));
                 var newGenome = parent1.Genome + parent2.Genome;
-                result.Add(new SmartSnake(GenerateInitialLocation(),world,newGenome));
+                result.Add(new SmartSnake(newGenome));
             }
 
             return result;
-        }
-
-        protected virtual int CalcFitness(ISnake snake)
-        {
-            return 1 + snake.BodyPossition.Count;
-        }
-
-        protected Location GenerateInitialLocation()
-        {
-            var random = new Random();
-            return new Location(random.Next(world.Size.Width), random.Next(world.Size.Height));
         }
     }
 }

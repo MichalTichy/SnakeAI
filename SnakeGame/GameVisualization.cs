@@ -19,11 +19,15 @@ namespace SnakeGame
 
         private readonly IWorld _world;
         private readonly ICollection<ISnake> _snakes;
-        private const int pointSize = 10;
-        public GameVisualization(IWorld world,ICollection<ISnake> snakes, bool debug = false,int speed=250)
+        private readonly int? _maxNumberOfSteps;
+        public const int pointSize = 10;
+
+        public int NumberOfElapsedSteps { get; protected set; } = 0;
+        public GameVisualization(IWorld world,ICollection<ISnake> snakes, int? maxNumberOfSteps = null ,bool debug = false,int speed=250)
         {
             _world = world;
             _snakes = snakes;
+            _maxNumberOfSteps = maxNumberOfSteps;
             this.debug = debug;
 
             InitializeComponent();
@@ -42,11 +46,18 @@ namespace SnakeGame
 
         private void GameUpdate_Tick(object sender, EventArgs e)
         {
+            if (_maxNumberOfSteps.HasValue && NumberOfElapsedSteps>=_maxNumberOfSteps)
+            {
+                GameUpdate.Stop();
+                return;
+            }
+
             if (!_snakes.Any(t=>t.IsAlive))
             {
                 GameUpdate.Stop();
             }
             _world.PerformGameStep();
+            NumberOfElapsedSteps++;
             Refresh();
         }
 
@@ -65,6 +76,7 @@ namespace SnakeGame
             {
                 DrawGrid(graphics);
             }
+            DrawBorder(graphics);
         }
 
 
@@ -100,6 +112,12 @@ namespace SnakeGame
                 var pen = new Pen(Color.White);
                 graphics.DrawLine(pen, new Point(i * pointSize,0), new Point(i * pointSize,_world.Size.Height*pointSize));
             }
+        }
+
+        private void DrawBorder(Graphics graphics)
+        {
+            var pen=new Pen(Color.White);
+            graphics.DrawRectangle(pen,0,0,_world.Size.Width*pointSize,_world.Size.Height*pointSize);
         }
 
         private Rectangle TransferPointToRectangle(Location location)

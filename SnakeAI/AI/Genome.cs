@@ -7,9 +7,9 @@ namespace SnakeAI.AI
 {
     public class Genome
     {
-        public const int GenomeLenght = 192;
+        public const int GenomeLenght = 128;
         public double[] Genes;
-
+        protected static Random random=new Random(DateTime.Now.Millisecond);
         protected const double MutationChange = 0.01;
 
         public Genome(double[] genes)
@@ -19,7 +19,7 @@ namespace SnakeAI.AI
 
         public Genome()
         {
-
+            Genes = GenerateRandomGenome();
         }
 
         protected virtual double[] GenerateRandomGenome()
@@ -38,7 +38,6 @@ namespace SnakeAI.AI
 
         private static double GenerateRandomGene()
         {
-            var random = new Random(DateTime.Now.Millisecond);
             var num = random.NextDouble();
             if (random.Next(2) % 2 == 0)
                 num *= -1;
@@ -54,7 +53,6 @@ namespace SnakeAI.AI
 
         private static void Mutate(double[] genes)
         {
-            var random = new Random(DateTime.Now.Millisecond);
 
             for (int i = 0; i < genes.Length; i++)
             {
@@ -68,7 +66,6 @@ namespace SnakeAI.AI
             List<double> genes = new List<double>();
             const int maxBlockLenght = GenomeLenght / 4;
             int genesLeft = GenomeLenght;
-            var random = new Random(DateTime.Now.Millisecond);
             while (genesLeft > 0)
             {
                 int blockSize = random.Next(genesLeft) + 1;

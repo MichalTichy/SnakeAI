@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using SnakeBase.Snake;
 
 namespace SnakeBase.World
@@ -41,13 +42,13 @@ namespace SnakeBase.World
 
         public virtual void PerformGameStep()
         {
-            foreach (var snake in AliveSnakes)
-                snake.Move();
 
-            var snakesAtFoodPossition = AliveSnakes.Where(s => s.HeadPossition == FoodPossition).ToList();
-            if (snakesAtFoodPossition.Any())
+            Parallel.ForEach(AliveSnakes, snake => snake.Move());
+            
+            var snakesAtFoodPosition = AliveSnakes.Where(s => s.HeadPossition == FoodPossition).ToList();
+            if (snakesAtFoodPosition.Any())
             {
-                snakesAtFoodPossition.GetRandom().Grow();
+                snakesAtFoodPosition.GetRandom().Grow();
                 GenerateNextFood();
             }
 
@@ -56,7 +57,17 @@ namespace SnakeBase.World
         protected void GenerateNextFood()
         {
             var random = new Random();
-            FoodPossition = new Location(random.Next(Size.Width), random.Next(Size.Height));
+
+            Location foodPosition=null;
+
+            var doesFoodCollideWithAnySnake = Snakes.Any(s =>
+                s.HeadPossition.Equals(foodPosition) || s.BodyPossition.Any(b => b.Equals(foodPosition)));
+
+            while (foodPosition==null || doesFoodCollideWithAnySnake)
+            {
+                foodPosition= new Location(random.Next(Size.Width), random.Next(Size.Height));
+            }
+            FoodPossition = foodPosition;
         }
     }
 }

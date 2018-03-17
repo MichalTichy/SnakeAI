@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using SnakeBase.World;
 
 namespace SnakeBase.Snake
@@ -46,7 +47,7 @@ namespace SnakeBase.Snake
                 return;
             }
 
-            var nextDirection = TranslateDirectionAccordingToheading(Head.Brain.DetermineNextMove());
+            var nextDirection = TranslateDirectionAccordingToHeading(Head.Brain.DetermineNextMove());
             PreviousHeadPossition = HeadPossition.Copy();
 
             switch (nextDirection)
@@ -67,7 +68,7 @@ namespace SnakeBase.Snake
             KillSnakeIfCollisionWasdetected();
         }
 
-        protected Direction TranslateDirectionAccordingToheading(Direction direction)
+        protected Direction TranslateDirectionAccordingToHeading(Direction direction)
         {
             switch (Heading)
             {
